@@ -115,15 +115,15 @@ def get_slurm_job_data(starttime, endtime):
   print("SL1 min wait time: ", results[0][2])
   
   temp = df_sl2['WAIT(s)']
-  results[1][2]=temp.max()
+  results[1][2]=temp.min()
   print("SL2 min wait time: ", results[1][2])
   
   temp = df_sl3['WAIT(s)']
-  results[2][2]=temp.max()
+  results[2][2]=temp.min()
   print("SL3 min wait time: ", results[2][2])
   
   temp = df_sl4['WAIT(s)']
-  results[3][2]=temp.max()
+  results[3][2]=temp.min()
   print("SL4 min wait time: ", results[3][2])
   
   return results
@@ -140,8 +140,8 @@ def get_min_per_day(starttime, endtime):
   
 if __name__ == '__main__':
   
-  starttime='2018-02-21'
-  endtime='2018-02-22'
+  starttime='2018-04-28'
+  endtime='2018-04-29'
   
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
