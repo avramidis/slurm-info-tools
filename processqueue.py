@@ -21,6 +21,7 @@ def get_slurm_job_data(starttime, endtime):
   # Run the sacct command to get the data from the cluster database
   subprocess.call(' '.join(["sacct -a --starttime ", starttime, " --endtime ", endtime, " --state COMPLETED --partition skylake --format=JobID%30,Submit,start,Account%30,ReqNodes,ReqCPUS | sed -n '2!p' > jobsinfo.txt"]), shell=True)
   
+def process_data():
   # Initialise dataframes
   # Jobs info dataframe
   df_jobsinfo = pandas.read_csv('jobsinfo.txt', skiprows=[1], delim_whitespace=True )
@@ -79,11 +80,11 @@ def get_slurm_job_data(starttime, endtime):
   print("SL2 mean wait time: ", results[1][0])
   
   temp = df_sl3['WAIT(s)']
-  results[1][0]=temp.mean()
+  results[2][0]=temp.mean()
   print("SL3 mean wait time: ", results[2][0])
   
   temp = df_sl4['WAIT(s)']
-  results[1][0]=temp.mean()
+  results[3][0]=temp.mean()
   print("SL4 mean wait time: ", results[3][0])
   
   print("")
@@ -128,14 +129,14 @@ def get_slurm_job_data(starttime, endtime):
   
   return results
   
-def get_min_per_day(starttime, endtime):
+# def get_min_per_day(starttime, endtime):
   
-  submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
-  endtime_time = datetime.datetime.strptime(endtime, '%Y-%m-%d')
+#   submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
+#   endtime_time = datetime.datetime.strptime(endtime, '%Y-%m-%d')
 
-  results = get_slurm_job_data(submit_time, endtime_time)
+#   results = get_slurm_job_data(submit_time, endtime_time)
   
-  print(results)
+#   print(results)
 
   
 if __name__ == '__main__':
@@ -146,7 +147,8 @@ if __name__ == '__main__':
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
 
-  results = get_slurm_job_data(starttime, endtime)
+  # get_slurm_job_data(starttime, endtime)
+  results = process_data()
   
   print(results)
   
