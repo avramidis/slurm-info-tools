@@ -147,7 +147,7 @@ if __name__ == '__main__':
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
   datetime_submit_time = datetime.datetime.strptime(starttime, '%Y-%m-%d')
 
-  # get_slurm_job_data(starttime, endtime)
+  get_slurm_job_data(starttime, endtime)
   results = process_data()
   
   print(results)
